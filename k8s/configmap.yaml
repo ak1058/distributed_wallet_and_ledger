@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wallet-config
+data:
+  KAFKA_BOOTSTRAP_SERVERS: "wallet-kafka:9092"
+  REDIS_HOST: "wallet-redis"
+  REDIS_PORT: "6379"

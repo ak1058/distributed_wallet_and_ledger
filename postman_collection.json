@@ -1,0 +1,259 @@
+{
+  "info": {
+    "name": "Wallet Platform API",
+    "description": "API collection to test the distributed ledger and wallet platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Create User Alice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"externalId\": \"alice-ext-123\",\n    \"name\": \"Alice\",\n    \"email\": \"alice@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. Create User Bob",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"externalId\": \"bob-ext-123\",\n    \"name\": \"Bob\",\n    \"email\": \"bob@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. Create Wallet Alice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"<PLACE_ALICE_USER_ID_HERE>\",\n    \"currency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/wallets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallets"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. Create Wallet Bob",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"<PLACE_BOB_USER_ID_HERE>\",\n    \"currency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/wallets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallets"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Deposit into Alice Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "idem-dep-1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"amount\": 1000,\n    \"currency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/wallets/<PLACE_ALICE_WALLET_ID_HERE>/deposit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallets",
+            "<PLACE_ALICE_WALLET_ID_HERE>",
+            "deposit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Transfer Alice to Bob",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "idem-tx-1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sourceWalletId\": \"<PLACE_ALICE_WALLET_ID_HERE>\",\n    \"destinationWalletId\": \"<PLACE_BOB_WALLET_ID_HERE>\",\n    \"amount\": 350,\n    \"currency\": \"USD\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/transfers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "transfers"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Get Alice Balance",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/wallets/<PLACE_ALICE_WALLET_ID_HERE>/balance",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallets",
+            "<PLACE_ALICE_WALLET_ID_HERE>",
+            "balance"
+          ]
+        }
+      }
+    },
+    {
+      "name": "8. Get Bob Balance",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/wallets/<PLACE_BOB_WALLET_ID_HERE>/balance",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "wallets",
+            "<PLACE_BOB_WALLET_ID_HERE>",
+            "balance"
+          ]
+        }
+      }
+    }
+  ]
+}
